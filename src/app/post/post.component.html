@@ -1,0 +1,71 @@
+<div class="card w-100% mb-3">
+  <div class="card-body">
+    <div class="d-flex row">
+      <div class="col-1">
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
+          <img src="https://github.com/mdo.png" alt="" width="40" height="40" class="rounded-circle me-2">
+        </a>
+      </div>
+      <div class="col-10">
+        <button class="btn rounded-pill border-0 w-100%" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          placeholder="คุณคิดอะไรอยู่ Phuwanath" type="button"
+          style="background-color: rgb(233, 230, 230); padding-left: 180px; padding-right: 180px;">คุณคิดอะไรอยู่
+          Phuwanath</button>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-6">
+        <button type="button" class="btn btn-light"><i class="bi bi-camera-video-fill"></i> วีดีโอถ่ายทอดสด</button>
+
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-images"></i> รูปภาพ/วิดีโอ</button>
+      </div>
+
+      <br>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Create you contents</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (submit)="onAddPost(postForm)" (submit)="onFileSelected($event)" #postForm="ngForm">
+              <div class="modal-body row d-flex">
+
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="คุณคิดอะไรอยู่ Phuwanath" id="floatingTextarea1"
+                      style="height: 200px" name="content" [(ngModel)]="enterContent" #content="ngModel"></textarea>
+                    <label for="floatingTextarea1">Content</label>
+                  </div>
+                </div>
+                <div class="mb-3 text-decoration-none">
+                  <label for="formFileMultiple" class="btn btn-link">
+                    <i class="bi bi-images"></i> เลือกรูปภาพ
+                  </label>
+                  <input #formFileMultiple class="form-control" type="file" id="formFileMultiple" multiple
+                    style="display: none;" (change)="onFileSelected($event)">
+                </div>
+                <!-- แสดงรูปภาพที่ถูกเลือก -->
+                <div *ngFor="let imageUrl of imageUrls">
+                  <img [src]="imageUrl" alt="Selected Image" class="img-thumbnail">
+                </div>
+                <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose(postForm)">Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Post</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

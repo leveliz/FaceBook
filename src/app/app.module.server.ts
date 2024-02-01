@@ -1,3 +1,4 @@
+import { Post } from './models/post';
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 
