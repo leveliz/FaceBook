@@ -30,7 +30,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Create you contents</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Create post</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form (submit)="onAddPost(postForm)" (submit)="onFileSelected($event)" #postForm="ngForm">
@@ -51,8 +51,10 @@
                     style="display: none;" (change)="onFileSelected($event)">
                 </div>
                 <!-- แสดงรูปภาพที่ถูกเลือก -->
-                <div *ngFor="let imageUrl of imageUrls">
-                  <img [src]="imageUrl" alt="Selected Image" class="img-thumbnail">
+                <div class="row">
+                  <div *ngFor="let imageUrl of imageUrls; let i = index" [ngClass]="{'col-md-6 mb-2': imageUrls.length % 2 === 0 || i < imageUrls.length - 1, 'col-12': imageUrls.length % 2 !== 0 && i === imageUrls.length - 1}">
+                    <img [src]="imageUrl" alt="Selected Image" class="img-fluid">
+                  </div>
                 </div>
                 <br>
               </div>

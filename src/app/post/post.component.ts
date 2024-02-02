@@ -22,6 +22,7 @@ export class PostComponent {
   onAddPost(form: NgForm) {
     if (this.enterContent || this.imageUrls.length > 0) {
       const post: Post = {
+        id: '',
         content: form.value.content,
         date: new Date(),
         imageUrls: this.imageUrls,

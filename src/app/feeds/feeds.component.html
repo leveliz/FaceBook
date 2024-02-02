@@ -1,4 +1,4 @@
-<div class="card w-100% mb-3" *ngFor="let post of posts">
+<div class="card w-100% mb-3" *ngFor="let post of posts.slice().reverse()">
   <div class="card-body">
     <div class="d-flex justify-content-between">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
@@ -14,10 +14,13 @@
     <p class="justify-content-start d-flex ps-4">{{post.date | date:'medium'}}</p>
     <h6 class="justify-content-start d-flex ps-4">{{post.content}}</h6>
 
-    <div *ngFor="let imageUrl of post.imageUrls">
-      <img [src]="imageUrl" alt="Post Image" class="img-thumbnail">
-    </div>
     <div class="row">
+      <div *ngFor="let imageUrl of post.imageUrls; let i = index" [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
+        <img [src]="imageUrl" alt="Post Image" class="img-fluid">
+      </div>
+    </div>
+
+    <div class="row mt-3">
       <div class="col-4">
         <button type="button" class="btn btn-light" [ngClass]="{'likechack': post.likechack}"
           (click)="onLikeClicked(post)"><i class="bi bi-hand-thumbs-up" [ngClass]="{'likechack': post.likechack}"></i>
@@ -25,13 +28,26 @@
       </div>
       <div class="col-4">
         <button type="button" class="btn btn-light" (click)="onCommented(post)"><i class="bi bi-chat"></i>
-          Comment{{post.comment.length}}</button>
+          Comment {{post.comment.length}}</button>
       </div>
       <div class="col-4">
         <button type="button" class="btn btn-light"><i class="bi bi-share"></i> Share</button>
       </div>
     </div>
     <hr>
+    <div class="card w-100% mb-3 bg-light">
+      <div class="card-body" *ngFor="let comment of post.comment">
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
+          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>Phuwana Namphosa</strong>
+        </a>
+        <p class="card-text text-start ps-5 mb-1">{{comment}}</p>
+        <span class="d-flex ms-5">
+          <a href="" class="me-2" style="text-decoration-line: none;">Like</a>
+          <a href=""  style="text-decoration-line: none;">Reply</a>
+        </span>
+      </div>
+    </div>
     <div class="row" *ngIf="post.commentchack">
       <div class="input-group mb-3 col-12">
         <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
@@ -41,15 +57,6 @@
           aria-label="Comment" aria-describedby="button-addon2" [(ngModel)]="post.newComment"></textarea>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="postComment(post)"><i
             class="bi bi-send"></i></button>
-      </div>
-    </div>
-    <div class="card w-100% mb-3 bg-light">
-      <div class="card-body" *ngFor="let comment of post.comment">
-        <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
-          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-          <strong>Phuwana Namphosa</strong>
-        </a>
-        <p class="card-text text-start ps-5">{{comment}}</p>
       </div>
     </div>
   </div>

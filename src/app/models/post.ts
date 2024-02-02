@@ -1,4 +1,5 @@
 export type Post = {
+    id: string;
     content: string;
     date: Date;
     imageUrls: string[];
