@@ -27,6 +27,7 @@ export class FeedsComponent implements OnInit, OnDestroy{
     if(posts.likechack){
       posts.like = posts.like > 0 ? posts.like - 1 : 0;
       posts.likechack = false;
+
     }else{
       posts.like = (posts.like || 0) + 1;
       posts.likechack = true;
@@ -47,6 +48,10 @@ export class FeedsComponent implements OnInit, OnDestroy{
       posts.commentchack = false;
     }
     posts.newComment = '';
+  }
+
+  ondelete(postId: string){
+    this.postsService.deletePost(postId);
   }
 
   ngOnDestroy(): void {
