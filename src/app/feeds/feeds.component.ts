@@ -16,22 +16,32 @@ export class FeedsComponent implements OnInit, OnDestroy{
   constructor(public postsService: PostsService) {}
 
   ngOnInit(): void{
+    // เรียก getPosts() เพื่อดึงข้อมูล posts จาก API
     this.postsService.getPosts();
+    // ติดตามอัพเดตจาก getPostUpdateListener()
     this.postsService.getPostUpdateListener()
     .subscribe((posts: Post[]) => {
+      // อัพเดตค่าของ this.posts เมื่อมีการเปลี่ยนแปลง
       this.posts = posts;
     });
   }
 
   onLikeClicked(posts: Post){
     if(posts.likechack){
+      // ถ้า likechack เป็น true ให้ลบ like ออกจาก posts.like
       posts.like = posts.like > 0 ? posts.like - 1 : 0;
       posts.likechack = false;
 
     }else{
+      // ถ้า likechack เป็น false ให้เพิ่ม like ใน posts.like
       posts.like = (posts.like || 0) + 1;
       posts.likechack = true;
+      // เรียกใช้งาน likePost จาก PostsService
+      this.postsService.likePost(posts.id ?? '').subscribe((res) => {
+        console.log(res);
+      });
     }
+
   }
 
   onCommented(posts: Post){
@@ -44,18 +54,23 @@ export class FeedsComponent implements OnInit, OnDestroy{
   // newComment = '';
   postComment(posts: Post){
     if(posts.newComment){
-      posts.comment.push(posts.newComment);
-      posts.commentchack = false;
+      posts.comment.push(posts.newComment); // เพิ่มความคิดเห็นใหม่ลงใน posts.comment
+
+      // เรียกใช้งาน commentPost จาก PostsService
+      this.postsService.commentPost(posts.id ?? '', posts.newComment).subscribe((res) => {
+        console.log(res);
+      });
+      posts.commentchack = false; // กำหนด commentchack เป็น false เพื่อยกเลิกการแสดงช่องกรอกความคิดเห็น
     }
-    posts.newComment = '';
+    posts.newComment = ''; // ล้างค่า newComment ให้เป็นค่าว่าง
   }
 
   ondelete(postId: string){
-    this.postsService.deletePost(postId);
+    this.postsService.deletePost(postId); // เรียกใช้ deletePost จาก PostsService เพื่อลบโพสต์
   }
 
   ngOnDestroy(): void {
-    this.postsSub.unsubscribe();
+    this.postsSub.unsubscribe(); // Unsubscribe จาก Subscription เมื่อ component ถูกทำลาย
   }
 
 }
