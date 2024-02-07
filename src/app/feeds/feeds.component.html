@@ -6,24 +6,28 @@
         <strong>Phuwana Namphosa</strong>
       </a>
       <span>
-        <button type="button" class="btn btn-light me-2"><i class="bi bi-pencil-square"></i></button>
-        <button type="button" class="btn btn-light" (click)="ondelete(post.id)"><i class="bi bi-trash-fill"></i></button>
+        <button type="button" class="btn btn-light me-2" (click)="editPost(post)" data-bs-toggle="modal"
+          data-bs-target="#editContent"><i class="bi bi-pencil-square"></i></button>
+        <button type="button" class="btn btn-light" (click)="ondelete(post.id)"><i
+            class="bi bi-trash-fill"></i></button>
 
       </span>
     </div>
-    <p class="justify-content-start d-flex ps-4">{{post.date | date:'medium'}}</p>
+    <p class="justify-content-start d-flex ps-4" style="margin-left: 16px;">{{post.date | date:'medium'}}</p>
     <h6 class="justify-content-start d-flex ps-4">{{post.content}}</h6>
 
     <div class="row">
-      <div *ngFor="let imageUrl of post.imageUrls; let i = index" [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
+      <div *ngFor="let imageUrl of post.imageUrls; let i = index"
+        [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
         <img [src]="imageUrl" alt="Post Image" class="img-fluid">
       </div>
     </div>
 
     <div class="row mt-3">
       <div class="col-4">
-        <button type="button" class="btn btn-light" (click)="onLikeClicked(post)" [ngClass]="{'likechack': post.likechack}"
-          ><i class="bi bi-hand-thumbs-up" [ngClass]="{'likechack': post.likechack}"></i>
+        <button type="button" class="btn btn-light" (click)="onLikeClicked(post)"
+          [ngClass]="{'likechack': post.likechack}"><i class="bi bi-hand-thumbs-up"
+            [ngClass]="{'likechack': post.likechack}"></i>
           Like {{post.like}}</button>
       </div>
       <div class="col-4">
@@ -35,7 +39,7 @@
       </div>
     </div>
     <hr>
-    <div class="card w-100% mb-3 bg-light  overflow-auto"   style="max-height: 350px;">
+    <div class="card w-100% mb-3 bg-light  overflow-auto" style="max-height: 350px;">
       <div class="card-body" *ngFor="let comment of post.comment">
         <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
           <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -44,7 +48,7 @@
         <p class="card-text text-start ps-5 mb-1">{{comment}}</p>
         <span class="d-flex ms-5">
           <a href="" class="me-2" style="text-decoration-line: none;">Like</a>
-          <a href=""  style="text-decoration-line: none;">Reply</a>
+          <a href="" style="text-decoration-line: none;">Reply</a>
         </span>
       </div>
     </div>
@@ -57,6 +61,48 @@
           aria-label="Comment" aria-describedby="button-addon2" [(ngModel)]="post.newComment"></textarea>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="postComment(post)"><i
             class="bi bi-send"></i></button>
+      </div>
+    </div>
+  </div>
+  <!-- Modal for editing post -->
+  <div class="modal fade" id="editContent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editContent">Create post</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form #postForm="ngForm">
+          <div class="modal-body row d-flex">
+
+            <div class="col-12">
+              <div class="form-floating">
+                <p class="justify-content-start d-flex ps-4">{{post.date | date:'medium'}}</p>
+                <textarea class="form-control1 w-100%" placeholder="คุณคิดอะไรอยู่ Phuwanath" id="floatingTextarea2"
+                  style="height: 200px" name="content" [(ngModel)]="editPostContent" #content="ngModel"></textarea>
+                <label for="floatingTextarea2">Content</label>
+              </div>
+            </div>
+            <div class="mb-3 text-decoration-none">
+              <label for="formFileMultiple1" class="btn btn-link">
+                <i class="bi bi-images"></i> เลือกรูปภาพ
+              </label>
+              <input #formFileMultiple class="form-control1" type="file" [(ngModel)]="editPostphoto" id="formFileMultiple1" multiple
+                style="display: none;">
+            </div>
+            <!-- แสดงรูปภาพที่ถูกเลือก -->
+            <div class="row">
+              <div *ngFor="let imageUrl of post.imageUrls; let i = index" [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
+                <img [src]="imageUrl" alt="Selected Image" class="img-fluid">
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="saveEdit(post)" data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

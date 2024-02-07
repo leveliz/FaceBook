@@ -73,4 +73,29 @@ export class FeedsComponent implements OnInit, OnDestroy{
     this.postsSub.unsubscribe(); // Unsubscribe จาก Subscription เมื่อ component ถูกทำลาย
   }
 
+  // Add these variables at the top of the component class
+editMode = false;
+editPostContent = '';
+editPostphoto:string[] = [];
+
+// Add these methods in the component class
+editPost(post: Post) {
+  this.editMode = true;
+  this.editPostContent = post.content;
+  this.editPostphoto = post.imageUrls;
+}
+
+
+// Update the post method in feeds.component.ts
+saveEdit(post: Post) {
+  // You may need to update this logic based on your actual API and service
+  post.content = this.editPostContent;
+
+  // Call your service method to update the post
+  
+
+}
+
+
+
 }
