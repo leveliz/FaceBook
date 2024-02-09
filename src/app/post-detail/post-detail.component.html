@@ -1,5 +1,5 @@
-<div class="card w-100% mb-3" *ngFor="let post of posts.slice().reverse()">
-  <div class="card-body" (click)="onPostClicked(post.id || '')">
+<!-- <div class="card w-100% mb-3" *ngIf="let post of posts.slice().reverse()">
+  <div class="card-body">
     <div class="d-flex justify-content-between">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -63,9 +63,9 @@
             class="bi bi-send"></i></button>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Modal for editing post -->
-  <div class="modal fade" id="editContent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="editContent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -89,9 +89,9 @@
               </label>
               <input #formFileMultiple class="form-control1" type="file" [(ngModel)]="editPostphoto" id="formFileMultiple1" multiple
                 style="display: none;" name="editPostphoto">
-            </div>
+            </div> -->
             <!-- แสดงรูปภาพที่ถูกเลือก -->
-            <div class="row">
+            <!-- <div class="row">
               <div *ngFor="let imageUrl of post.imageUrls; let i = index" [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
                 <img [src]="imageUrl" alt="Selected Image" class="img-fluid">
               </div>
@@ -106,4 +106,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); //นำเข้าโมดูล เพื่อใช้ในการแปลงข้อมูลที่ส่งมาในรูปแบบของ JSON เป็น JavaScript object 
 const mongoose = require("mongoose");
 const app = express();
 
@@ -19,7 +19,7 @@ mongoose
   .catch(() => {
     console.log("Connection failed!");
   });
-  
+
 // เพิ่ม body-parser middleware โดยกำหนดค่า limit ให้สามารถรับข้อมูลขนาดใหญ่ได้
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));

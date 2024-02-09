@@ -1,37 +1,42 @@
 import { PostsService } from './../posts.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Post } from '../models/post';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feeds',
   templateUrl: './feeds.component.html',
   styleUrl: './feeds.component.css'
 })
-export class FeedsComponent implements OnInit, OnDestroy{
+export class FeedsComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
-  private postsSub: Subscription = new Subscription;
-  constructor(public postsService: PostsService) {}
+  private postsSub: Subscription = new Subscription; //สร้าง Subscription เพื่อเก็บ subscription ที่ได้จากการ subscribe
+  constructor(public postsService: PostsService, private router: Router) { }
 
-  ngOnInit(): void{
+  @Output() postClicked = new EventEmitter<string>();
+
+
+  //ทำการเริ่มต้นการโหลดข้อมูลหรือการทำงานอื่น ๆ
+  ngOnInit(): void {
     // เรียก getPosts() เพื่อดึงข้อมูล posts จาก API
     this.postsService.getPosts();
     // ติดตามอัพเดตจาก getPostUpdateListener()
     this.postsService.getPostUpdateListener()
-    .subscribe((posts: Post[]) => {
-      // อัพเดตค่าของ this.posts เมื่อมีการเปลี่ยนแปลง
-      this.posts = posts;
-    });
+      .subscribe((posts: Post[]) => {
+        // อัพเดตค่าของ this.posts เมื่อมีการเปลี่ยนแปลง
+        this.posts = posts;
+      });
   }
 
-  onLikeClicked(posts: Post){
-    if(posts.likechack){
+  onLikeClicked(posts: Post) {
+    if (posts.likechack) {
       // ถ้า likechack เป็น true ให้ลบ like ออกจาก posts.like
       posts.like = posts.like > 0 ? posts.like - 1 : 0;
       posts.likechack = false;
 
-    }else{
+    } else {
       // ถ้า likechack เป็น false ให้เพิ่ม like ใน posts.like
       posts.like = (posts.like || 0) + 1;
       posts.likechack = true;
@@ -42,17 +47,17 @@ export class FeedsComponent implements OnInit, OnDestroy{
     }
 
   }
-
-  onCommented(posts: Post){
-    if(posts.commentchack){
+  // ใช้ตรวจสอบเพื่อเปิดปิดคอมเม้น
+  onCommented(posts: Post) {
+    if (posts.commentchack) {
       posts.commentchack = false;
-    }else{
+    } else {
       posts.commentchack = true;
     }
   }
   // newComment = '';
-  postComment(posts: Post){
-    if(posts.newComment){
+  postComment(posts: Post) {
+    if (posts.newComment) {
       posts.comment.push(posts.newComment); // เพิ่มความคิดเห็นใหม่ลงใน posts.comment
 
       // เรียกใช้งาน commentPost จาก PostsService
@@ -64,7 +69,7 @@ export class FeedsComponent implements OnInit, OnDestroy{
     posts.newComment = ''; // ล้างค่า newComment ให้เป็นค่าว่าง
   }
 
-  ondelete(postId: string){
+  ondelete(postId: string) {
     this.postsService.deletePost(postId); // เรียกใช้ deletePost จาก PostsService เพื่อลบโพสต์
   }
 
@@ -73,28 +78,39 @@ export class FeedsComponent implements OnInit, OnDestroy{
   }
 
   // Add these variables at the top of the component class
-editMode = false;
-editPostContent = '';
-editPostphoto:string[] = [];
+  editMode = false;
+  editPostContent = '';
+  editPostphoto: string[] = [];
 
-// Add these methods in the component class
-editPost(post: Post) {
-  this.editMode = true;
-  this.editPostContent = post.content;
-  this.editPostphoto = post.imageUrls;
-}
-
-
-// Update the post method in feeds.component.ts
-saveEdit(post: Post) {
-  // You may need to update this logic based on your actual API and service
-  post.content = this.editPostContent;
-
-  // Call your service method to update the post
+  // Add these methods in the component class
+  editPost(post: Post) {
+    this.editMode = true;
+    this.editPostContent = post.content;
+    this.editPostphoto = post.imageUrls;
+  }
 
 
-}
+  // Update the post method in feeds.component.ts
+  saveEdit(post: Post) {
+    // You may need to update this logic based on your actual API and service
+    post.content = this.editPostContent;
+    post.imageUrls = this.editPostphoto;
+    this.postsService.updatePost(post);
+    this.editMode = false;
+    this.editPostContent = '';
+    this.editPostphoto = [];
 
+  }
+
+  onPostClicked(postId: string) {
+    if (postId) {
+      this.postClicked.emit(postId);
+      this.router.navigate(['/posts', postId]);
+
+    } else {
+      console.error('postId is not available');
+    }
+  }
 
 
 }

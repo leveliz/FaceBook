@@ -11,6 +11,7 @@ import { SidetaprightComponent } from './sidetapright/sidetapright.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsService } from './posts.service';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PostsService } from './posts.service';
     StorysComponent,
     PostComponent,
     SidetaprightComponent,
+    PostDetailComponent,
   ],
   imports: [
     BrowserModule,

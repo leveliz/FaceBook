@@ -19,6 +19,7 @@ export class PostComponent {
 
   constructor(public postsService: PostsService) { }
 
+  // เพิ่มโพสต์
   onAddPost(form: NgForm) {
     if (this.enterContent || this.imageUrls.length > 0) {
       const post: Post = {
@@ -65,6 +66,7 @@ export class PostComponent {
     }
   }
 
+  //ปรับขนาดของรูปภาพ เมื่อได้รับไฟล์รูปภาพเข้ามา
   resizeImage(file: File, maxWidth: number, maxHeight: number, callback: (resizedImageUrl: string) => void): void {
     const reader = new FileReader();
     reader.onload = (e: any) => {
@@ -81,6 +83,7 @@ export class PostComponent {
           height *= ratio;
         }
 
+        // สร้าง canvas ทำการวาดรูปภาพใหม่ที่มีขนาดใหม่
         const canvas = document.createElement('canvas');
         canvas.width = width;
         canvas.height = height;
