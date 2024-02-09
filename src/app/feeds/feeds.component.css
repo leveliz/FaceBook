@@ -1,3 +1,7 @@
 .likechack{
   color: red;
 }
+
+.post {
+  cursor: pointer;
+}

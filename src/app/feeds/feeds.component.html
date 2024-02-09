@@ -1,25 +1,27 @@
-<div class="card w-100% mb-3" *ngFor="let post of posts.slice().reverse()">
-  <div class="card-body" (click)="onPostClicked(post.id || '')">
-    <div class="d-flex justify-content-between">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>Phuwana Namphosa</strong>
-      </a>
-      <span>
-        <button type="button" class="btn btn-light me-2" (click)="editPost(post)" data-bs-toggle="modal"
-          data-bs-target="#editContent"><i class="bi bi-pencil-square"></i></button>
-        <button type="button" class="btn btn-light" (click)="ondelete(post.id)"><i
-            class="bi bi-trash-fill"></i></button>
+<div class="card w-100% mb-3" *ngFor="let post of posts.slice().reverse()" >
+  <div class="card-body" >
+    <div class="post" (click)="onPostClicked(post.id || '')">
+      <div class="d-flex justify-content-between">
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
+          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>Phuwana Namphosa</strong>
+        </a>
+        <span>
+          <button type="button" class="btn btn-light me-2" (click)="editPost(post)" data-bs-toggle="modal"
+            data-bs-target="#editContent"><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-light" (click)="ondelete(post.id)"><i
+              class="bi bi-trash-fill"></i></button>
 
-      </span>
-    </div>
-    <p class="justify-content-start d-flex ps-4" style="margin-left: 16px;">{{post.date | date:'medium'}}</p>
-    <h6 class="justify-content-start d-flex ps-4">{{post.content}}</h6>
+        </span>
+      </div>
+      <p class="justify-content-start d-flex ps-4" style="margin-left: 16px;">{{post.date | date:'medium'}}</p>
+      <h6 class="justify-content-start d-flex ps-4">{{post.content}}</h6>
 
-    <div class="row">
-      <div *ngFor="let imageUrl of post.imageUrls; let i = index"
-        [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
-        <img [src]="imageUrl" alt="Post Image" class="img-fluid">
+      <div class="row">
+        <div *ngFor="let imageUrl of post.imageUrls; let i = index"
+          [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
+          <img [src]="imageUrl" alt="Post Image" class="img-fluid">
+        </div>
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser"); //นำเข้าโมดูล เพื่อใช้ในการแปลงข้อมูลที่ส่งมาในรูปแบบของ JSON เป็น JavaScript object 
+const bodyParser = require("body-parser"); //นำเข้าโมดูล เพื่อใช้ในการแปลงข้อมูลที่ส่งมาในรูปแบบของ JSON เป็น JavaScript object
 const mongoose = require("mongoose");
 const app = express();
 
@@ -71,6 +71,18 @@ app.get("/api/posts", (req, res, next) => {
   });
 });
 
+app.get("/api/posts/:id", (req, res, next) => {
+  const postId = req.params.id;
+  Post.findById(postId).then((post) => {
+    if (post) {
+      res.status(200).json(post);
+    } else {
+      res.status(404).json({ message: "Post not found!" });
+    }
+  });
+});
+
+
 // ลบโพสต์ตาม ID แค่โพสต์เดียว
 app.delete("/api/posts/:id", (req, res, next) => {
   Post.deleteOne({ _id: req.params.id })
@@ -119,17 +131,6 @@ app.patch("/api/posts/:id/like", (req, res, next) => {
     });
 });
 
-// app.patch("/api/posts/:id/unlike", (req, res, next) => {
-//   Post.updateOne({ _id: req.params.id }, { $inc: { like: -1 } })
-//     .then((result) => {
-//       console.log(result);
-//       res.status(200).json({ message: "Update successful!" });
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ message: 'Failed to update post!' });
-//       console.error(error);
-//     });
-// });
 
 // เพิ่ม comment ตาม ID แค่โพสต์เดียว และเพิ่ม comment ใหม่ บันทึกลงฐานข้อมูล
 app.patch("/api/posts/:id/comment", (req, res, next) => {

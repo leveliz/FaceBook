@@ -37,6 +37,10 @@ export class PostsService {
       });
   }
 
+  getPost(id: string) {
+    return this.http.get<Post>(`http://localhost:3000/api/posts/${id}`);
+  }
+
   // ส่งข้อมูลไปยังคอมโพเนนต์ต่างๆที่ต้องการ
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
