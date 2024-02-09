@@ -1,8 +1,7 @@
 import { PostsService } from './../posts.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../models/post';
-import { Subscribable, Subscription } from 'rxjs';
-import e from 'express';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-feeds',
@@ -92,7 +91,7 @@ saveEdit(post: Post) {
   post.content = this.editPostContent;
 
   // Call your service method to update the post
-  
+
 
 }
 

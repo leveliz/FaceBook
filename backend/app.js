@@ -19,6 +19,10 @@ mongoose
   .catch(() => {
     console.log("Connection failed!");
   });
+  
+// เพิ่ม body-parser middleware โดยกำหนดค่า limit ให้สามารถรับข้อมูลขนาดใหญ่ได้
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // ตั้งค่าสำหรับการทำ CORS
 app.use((req, res, next) => {

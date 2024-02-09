@@ -53,11 +53,9 @@ export class PostComponent {
       if (isImage) {
         this.imageUrls = []; // เคลียร์รายการรูปภาพที่ถูกเลือกเมื่อมีการเลือกไฟล์ใหม่
         for (const file of files) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.imageUrls.push(e.target.result);
-          };
-          reader.readAsDataURL(file);
+          this.resizeImage(file, 500, 500, (resizedImageUrl: string) => {
+            this.imageUrls.push(resizedImageUrl);
+          });
         }
       } else {
         // แสดง alert หรือทำการจัดการในกรณีที่ไม่ใช่ไฟล์รูปภาพ
@@ -67,4 +65,36 @@ export class PostComponent {
     }
   }
 
+  resizeImage(file: File, maxWidth: number, maxHeight: number, callback: (resizedImageUrl: string) => void): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const imageUrl = e.target.result;
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        // ตรวจสอบว่าต้องการปรับขนาดหรือไม่
+        if (width > maxWidth || height > maxHeight) {
+          const ratio = Math.min(maxWidth / width, maxHeight / height);
+          width *= ratio;
+          height *= ratio;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0, width, height);
+
+        // แปลง canvas เป็น URL รูป
+        const resizedImageUrl = canvas.toDataURL('image/jpeg'); // สามารถเลือกปรับ format ตามที่ต้องการ
+        callback(resizedImageUrl);
+      };
+      img.src = imageUrl;
+    };
+    reader.readAsDataURL(file);
+  }
 }
+
