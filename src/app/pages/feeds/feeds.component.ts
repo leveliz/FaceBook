@@ -1,6 +1,6 @@
-import { PostsService } from './../posts.service';
+import { PostsService } from '../../posts.service';
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
-import { Post } from '../models/post';
+import { Post } from '../../models/post';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 declare const bootstrap: any; // เพิ่มบรรทัดนี้เพื่อประกาศ bootstrap ให้กับ TypeScript
