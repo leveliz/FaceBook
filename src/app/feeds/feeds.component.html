@@ -1,5 +1,5 @@
-<div class="card w-100% mb-3" *ngFor="let post of posts.slice().reverse()" >
-  <div class="card-body" >
+<div class="card w-100% mb-3" *ngFor="let post of posts.slice().reverse()">
+  <div class="card-body">
     <div class="post" (click)="onPostClicked(post.id || '')">
       <div class="d-flex justify-content-between">
         <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
@@ -37,7 +37,8 @@
           Comment {{post.comment.length}}</button>
       </div>
       <div class="col-4">
-        <button type="button" class="btn btn-light"><i class="bi bi-share"></i> Share</button>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#shareModal"><i
+            class="bi bi-share"></i> Share</button>
       </div>
     </div>
     <hr>
@@ -89,12 +90,13 @@
               <label for="formFileMultiple1" class="btn btn-link">
                 <i class="bi bi-images"></i> เลือกรูปภาพ
               </label>
-              <input #formFileMultiple class="form-control1" type="file" [(ngModel)]="editPostphoto" id="formFileMultiple1" multiple
-                style="display: none;" name="editPostphoto">
+              <input #formFileMultiple class="form-control1" type="file" [(ngModel)]="editPostphoto"
+                id="formFileMultiple1" multiple style="display: none;" name="editPostphoto">
             </div>
             <!-- แสดงรูปภาพที่ถูกเลือก -->
             <div class="row">
-              <div *ngFor="let imageUrl of post.imageUrls; let i = index" [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
+              <div *ngFor="let imageUrl of post.imageUrls; let i = index"
+                [ngClass]="{'col-md-6 mb-2': post.imageUrls.length % 2 === 0 || i < post.imageUrls.length - 1, 'col-12': post.imageUrls.length % 2 !== 0 && i === post.imageUrls.length - 1}">
                 <img [src]="imageUrl" alt="Selected Image" class="img-fluid">
               </div>
             </div>
@@ -102,10 +104,56 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="saveEdit(post)" data-bs-dismiss="modal">Save changes</button>
+            <button type="button" class="btn btn-primary" (click)="saveEdit(post)" data-bs-dismiss="modal">Save
+              changes</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  <!-- Modal share -->
+  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="shareModalLabel">Share</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="exampleDataList" class="form-label ustify-content-start d-flex">To.</label>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="@Type to search..." #userInput (change)="updateUserName()">
+            <datalist id="datalistOptions">
+              <option value="Alex Novana">
+              <option value="Asura Naruto">
+              <option value="Choco Pie">
+              <option value="Jang Wangyoung">
+            </datalist>
+            <div class="mb-3 justify-content-start mt-3">
+              <label for="disabledTextInput" class="form-label justify-content-start d-flex">Massage</label>
+              <input type="text" id="disabledTextInput" class="form-control" placeholder="Text" #messageInput>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="showToast()" id="toastBtn"
+            data-bs-dismiss="modal">Share <i class="bi bi-send"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong class="me-auto">Phuwaath Namphosa</strong>
+        <small>Shared 2 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" (click)="closeToast()"
+          aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Your message has been shared!
+      </div>
+    </div>
+  </div>
+
 </div>

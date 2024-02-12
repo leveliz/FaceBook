@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../models/post';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import e from 'express';
+
 
 @Component({
   selector: 'app-post-detail',

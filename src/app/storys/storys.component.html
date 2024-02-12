@@ -1,34 +1,10 @@
 
-<div class="row mt-4" style="font-size: 11px;">
-  <div class="col-3">
+<div class="row mt-4 overflow-x-auto"  style="font-size: 11px; max-height: 238px; white-space: nowrap;">
+  <div class="col-3" *ngFor="let i of items ">
     <div class="card ">
-      <img src="https://placekitten.com/200/300" class="rounded" alt="...">
+      <img [src]="i.imgUrl" class="rounded" alt="...">
       <div class="card-img-overlay d-flax align-items-end" style="margin-top: 190px;">
         <p class="card-text text-light d-flax align-items-end"><strong>Phuwanath Namphosa</strong></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-3">
-    <div class="card">
-      <img src="https://placekitten.com/200/300" class="rounded" alt="...">
-      <div class="card-img-overlay d-flax align-items-end" style="margin-top: 190px;">
-        <p class="card-text text-light"><strong>Phuwanath Namphosa</strong></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-3">
-    <div class="card">
-      <img src="https://placekitten.com/200/300" class="rounded" alt="...">
-      <div class="card-img-overlay d-flax align-items-end" style="margin-top: 190px;">
-        <p class="card-text text-light "><strong>Phuwanath Namphosa</strong></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-3">
-    <div class="card">
-      <img src="https://placekitten.com/200/300" class="rounded" alt="...">
-      <div class="card-img-overlay d-flax align-items-end" style="margin-top: 190px;">
-        <p class="card-text text-light"><strong>Phuwanath Namphosa</strong></p>
       </div>
     </div>
   </div>

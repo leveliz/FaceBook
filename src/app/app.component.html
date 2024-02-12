@@ -8,14 +8,14 @@
       <div class="col-lg-6">
         <div class="container text-center">
           <div class="row g-3">
-            <div class="col-12">
+            <div class="col-12" *ngIf="showPost">
               <app-storys></app-storys>
             </div>
-            <div class="col-12">
+            <div class="col-12" *ngIf="showPost">
               <app-post></app-post>
             </div>
             <div class="col-12">
-              <router-outlet></router-outlet>
+              <router-outlet (postClicked)="togglePostView($event)"></router-outlet>
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 import { PostsService } from './../posts.service';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { Post } from '../models/post';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+declare const bootstrap: any; // เพิ่มบรรทัดนี้เพื่อประกาศ bootstrap ให้กับ TypeScript
 
 @Component({
   selector: 'app-feeds',
@@ -12,8 +13,16 @@ import { Router } from '@angular/router';
 export class FeedsComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
+  onPostSet: boolean;
+  @ViewChild('messageInput') messageInput!: ElementRef;
+  @ViewChild('userInput') userInput!: ElementRef;
+  userName: string = ''; // ตัวแปรสำหรับเก็บชื่อผู้ใช้
+
   private postsSub: Subscription = new Subscription; //สร้าง Subscription เพื่อเก็บ subscription ที่ได้จากการ subscribe
-  constructor(public postsService: PostsService, private router: Router) { }
+  constructor(public postsService: PostsService, private router: Router ) {
+    this.onPostSet = true;
+  }
+
 
   @Output() postClicked = new EventEmitter<string>();
 
@@ -69,7 +78,39 @@ export class FeedsComponent implements OnInit, OnDestroy {
     posts.newComment = ''; // ล้างค่า newComment ให้เป็นค่าว่าง
   }
 
+  closeToast() {
+    const toastElement = document.getElementById('toast');
+    const bootstrapToast = new bootstrap.Toast(toastElement);
+    bootstrapToast.hide();
+  }
+
+  updateUserName() {
+    this.userName = this.userInput.nativeElement.value; // อัพเดตชื่อผู้ใช้เมื่อมีการเลือก option
+  }
+
+  showToast() {
+    const toastUserName = document.querySelector('.toast-header strong');
+    if (toastUserName) {
+      toastUserName.innerHTML = this.userName; // แสดงชื่อผู้ใช้ใน Toast
+    }
+    const message = this.messageInput.nativeElement.value;
+    // ตรวจสอบว่ามีข้อความที่พิมพ์เข้ามาหรือไม่
+    if (message.trim() !== '') {
+      // แสดง Toast
+      // ตรวจสอบเงื่อนไขและทำตามที่ต้องการ
+      // ในที่นี้ให้ใส่ข้อความที่พิมพ์เข้ามาลงใน Toast
+      const toastBody = document.querySelector('.toast-body');
+      if (toastBody) {
+        toastBody.innerHTML = message;
+      }
+      const toastElement = document.getElementById('toast');
+      const bootstrapToast = new bootstrap.Toast(toastElement);
+      bootstrapToast.show();
+    }
+  }
+
   ondelete(postId: string) {
+    this.onPostSet = false;
     this.postsService.deletePost(postId); // เรียกใช้ deletePost จาก PostsService เพื่อลบโพสต์
   }
 
@@ -84,6 +125,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
 
   // Add these methods in the component class
   editPost(post: Post) {
+    this.onPostSet = false;
     this.editMode = true;
     this.editPostContent = post.content;
     this.editPostphoto = post.imageUrls;
@@ -103,7 +145,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
   }
 
   onPostClicked(postId: string) {
-    if (postId) {
+    if (this.onPostSet && postId) {
       this.postClicked.emit(postId);
       this.router.navigate(['/posts', postId]);
 

@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class StorysComponent {
 
+  items = [
+    {imgUrl:'https://placekitten.com/200/300', name:'img1'},
+    {imgUrl:'https://placekitten.com/200/300', name:'img2'},
+    {imgUrl:'https://placekitten.com/200/300', name:'img3'},
+    {imgUrl:'https://placekitten.com/200/300', name:'img4'}
+  ];
+
 }
