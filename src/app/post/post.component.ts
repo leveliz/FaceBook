@@ -1,7 +1,7 @@
 import { Component,ElementRef, ViewChild } from '@angular/core';
-import { Post } from '../../models/post';
+import { Post } from '../models/post';
 import { NgForm } from '@angular/forms';
-import { PostsService } from '../../posts.service';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post',
