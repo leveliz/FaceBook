@@ -26,7 +26,7 @@
     </li>
     <li>
       <a href="#" class="nav-link link-dark">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history"
+        <svg xmlns="http://www.w3.org/2000/svg" style="color: grey;" width="16" height="16" fill="currentColor" class="bi bi-clock-history"
           viewBox="0 0 16 16">
           <path
             d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z" />
@@ -39,6 +39,12 @@
     </li>
     <li>
       <a href="#" class="nav-link link-dark">
+        <i class="bi bi-archive-fill" style="color: burlywood;"></i>
+        กลุ่ม
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-dark">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window"
           viewBox="0 0 16 16">
           <path
@@ -47,98 +53,29 @@
         Marketplace
       </a>
     </li>
-    <li>
+    <li class="dropdown">
       <a href="#" class="nav-link link-dark text-decoration-none dropdown-toggle" id="customersDropdown" role="button"
         data-bs-toggle="dropdown" aria-expanded="false">
         <svg class="bi me-2" width="16" height="16">
           <use xlink:href="#people-circle"></use>
         </svg>
-        Customers
+        เพิ่มเติม
       </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
     </li>
   </ul>
   <hr>
   <h6 class="text-body-secondary"><strong>ทางลัดของคุณ</strong></h6>
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
+    <li class="nav-item" *ngFor="let i of games">
       <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม
+        <img [src]="i.imgUrl" alt="" width="32" height="32" class="rounded me-2">
+        {{i.name}}
       </a>
     </li>
-
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image1.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม1
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image2.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม2
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image3.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม3
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image4.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม4
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม5
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image1.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม6
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image2.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม7
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม8
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม9
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม10
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม11
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-dark" aria-current="page">
-        <img src="/assets/images/Featured-image.png" alt="" width="32" height="32" class="rounded me-2">
-        เกม12
-      </a>
-    </li>
-
   </ul>
 </div>

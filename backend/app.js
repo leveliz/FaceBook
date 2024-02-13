@@ -71,6 +71,7 @@ app.get("/api/posts", (req, res, next) => {
   });
 });
 
+// ดึงโพสต์ตาม ID แค่โพสต์เดียว โดยใช้ ID ที่ส่งมา และค้นหาจากฐานข้อมูล แล้วส่งกลับไป ถ้าไม่พบให้ส่งข้อความว่า "Post not found!" กลับไป
 app.get("/api/posts/:id", (req, res, next) => {
   const postId = req.params.id;
   Post.findById(postId).then((post) => {
@@ -83,7 +84,7 @@ app.get("/api/posts/:id", (req, res, next) => {
 });
 
 
-// ลบโพสต์ตาม ID แค่โพสต์เดียว
+// ลบโพสต์ตาม ID แค่โพสต์เดียว โดยใช้ ID ที่ส่งมา และลบจากฐานข้อมูล แล้วส่งกลับไป ถ้าไม่สำเร็จให้ส่งข้อความว่า "Failed to delete post!" กลับไป
 app.delete("/api/posts/:id", (req, res, next) => {
   Post.deleteOne({ _id: req.params.id })
   .then((result) => {
@@ -94,7 +95,7 @@ app.delete("/api/posts/:id", (req, res, next) => {
   });
 });
 
-// อัพเดตโพสต์ ตาม ID แค่โพสต์เดียว
+// อัพเดตโพสต์ ตาม ID แค่โพสต์เดียว โดยใช้ ID ที่ส่งมา และอัพเดตจากฐานข้อมูล แล้วส่งกลับไป ถ้าไม่สำเร็จให้ส่งข้อความว่า "Failed to update post!" กลับไป
 app.put("/api/posts/:id", (req, res, next) => {
   const post = new Post({
     _id: req.body.id,
@@ -107,7 +108,7 @@ app.put("/api/posts/:id", (req, res, next) => {
     commentchack: req.body.commentchack,
     newComment: req.body.newComment,
   });
-  // อัพเดตลงฐานข้อมูล
+  // อัพเดตลงฐานข้อมูล โดยใช้ ID ที่ส่งมา
   Post.updateOne({ _id: req.params.id }, post).then((result) => {
     console.log(result);
     res.status(200).json({ message: "Update successful!" });
@@ -144,6 +145,5 @@ app.patch("/api/posts/:id/comment", (req, res, next) => {
       console.error(error);
     });
 });
-
 
 module.exports = app;

@@ -15,7 +15,7 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
-  // ส่งคำขอไปยังเซิร์ฟเวอร์เพื่อขอข้อมูลโพสต์
+  // ส่งคำขอไปยังเซิร์ฟเวอร์เพื่อขอข้อมูลโพสต์ 
   getPosts() {
     this.http.get<{ message: string, posts: any }>('http://localhost:3000/api/posts')
       .pipe(map((postData) => {
@@ -37,16 +37,17 @@ export class PostsService {
       });
   }
 
+  // ส่งข้อมูลโพสต์ที่มี id ที่ระบุไปยังคอมโพเนนต์ที่ต้องการ
   getPost(id: string) {
     return this.http.get<Post>(`http://localhost:3000/api/posts/${id}`);
   }
 
-  // ส่งข้อมูลไปยังคอมโพเนนต์ต่างๆที่ต้องการ
+  // ส่งข้อมูลไปยังคอมโพเนนต์ต่างๆที่ต้องการ โดยจะส่งข้อมูลทุกครั้งที่มีการเปลี่ยนแปลงของโพสต์
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }
 
-  // ส่งข้อมูลโพสต์ไปยังเซิร์ฟเวอร์
+  // ส่งข้อมูลโพสต์ไปยังเซิร์ฟเวอร์ โพสต์ที่ถูกสร้างจะถูกส่งกลับมาเป็นข้อมูล JSON และจะถูกเก็บไว้ในตัวแปร posts และจะถูกส่งไปยังคอมโพเนนต์ที่ต้องการ
   addPost(post: Post) {
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/posts', post)
     .subscribe((responseData) => {
@@ -59,7 +60,7 @@ export class PostsService {
     });
   }
 
-  // ส่งข้อมูลไปยังเซิร์ฟเวอร์เพื่อลบโพสต์
+  // ส่งข้อมูลไปยังเซิร์ฟเวอร์เพื่อลบโพสต์ โพสต์ที่ต้องการลบจะถูกส่งไปเป็นพารามิเตอร์ postId และจะถูกลบออกจาก posts และจะถูกส่งไปยังคอมโพเนนต์ที่ต้องการ
   deletePost(postId: string) {
     this.http.delete('http://localhost:3000/api/posts/' + postId)
       .subscribe((response) => {
@@ -70,7 +71,7 @@ export class PostsService {
       });
   }
 
-  // ส่งข้อมูลไปยังเซิร์ฟเวอร์เพื่ออัพเดทโพสต์
+  // ส่งข้อมูลไปยังเซิร์ฟเวอร์เพื่ออัพเดทโพสต์ โพสต์ที่ต้องการอัพเดทจะถูกส่งไปเป็นพารามิเตอร์ post และจะถูกส่งไปเป็นข้อมูล JSON ไปยังเซิร์ฟเวอร์ โพสต์ที่ถูกอัพเดทจะถูกส่งกลับมาเป็นข้อมูล JSON และจะถูกเก็บไว้ในตัวแปร posts และจะถูกส่งไปยังคอมโพเนนต์ที่ต้องการ
   updatePost(post: Post) {
     this.http.put('http://localhost:3000/api/posts/' + post.id, post)
       .subscribe(response => {

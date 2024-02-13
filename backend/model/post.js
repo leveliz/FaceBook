@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const { type } = require('os');
+const mongoose = require('mongoose'); // เรียกใช้ mongoose
+const { type } = require('os'); // ใช้งาน mongoose สำหรับการเชื่อมต่อฐานข้อมูล
 
+// สร้างโพสต์ schema สำหรับการบันทึกลงฐานข้อมูล โดยกำหนดชนิดของข้อมูลแต่ละ field และค่า default ที่จะใช้เมื่อไม่ได้ระบุค่า
 const postSchema = mongoose.Schema({
     content: { type: String, default: ''},
     date: { type: Date, default: Date.now },

@@ -93,28 +93,10 @@
     </a>
   </div>
   <ul class="nav nav-pills flex-column mb-auto ps-3">
-    <li class="nav-item mb-3">
+    <li class="nav-item mb-3" *ngFor="let n of names">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none ">
-        <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
-        <strong>Alex Novana</strong>
-      </a>
-    </li>
-    <li class="nav-item mb-3">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
-        <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
-        <strong>Asura Naruto</strong>
-      </a>
-    </li>
-    <li class="nav-item mb-3">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
-        <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
-        <strong>Choco Pie</strong>
-      </a>
-    </li>
-    <li class="nav-item mb-3">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
-        <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
-        <strong>Jang Wangyoung</strong>
+        <img [src]="n.imgUrl" alt="" width="35" height="35" class="rounded-circle me-2">
+        <strong>{{n.name}}</strong>
       </a>
     </li>
   </ul>
