@@ -19,11 +19,42 @@
     </div>
     <div class="d-flex col-2 justify-content-end ">
       <a class="me-2 rounded-circle bg-body-secondary" href="#"><i class="bi bi-grid-3x3-gap-fill fs-4 mx-2"></i></a>
-      <a class="me-2 rounded-circle bg-body-secondary" href="#"><i class="bi bi-messenger fs-4 mx-2"></i></a>
+      <a class="me-2 rounded-circle bg-body-secondary" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-messenger fs-4 mx-2"></i></a>
       <a class="me-2 rounded-circle bg-body-secondary" href="#"><i class="bi bi-bell-fill fs-4 mx-2"></i></a>
       <a href="#" class="me-2 link-dark text-decoration-none">
         <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
       </a>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"><img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2">
+        <strong>Alex Novana</strong></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p class="d-flex justify-content-center">{{dateT | date:'medium'}}</p>
+      <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2"><strong  class="border rounded-end px-2">hi</strong>
+      <br>
+      <h6 class="d-flex justify-content-end"><strong class="border rounded-start px-2">hi</strong></h6>
+      <h6 class="d-flex justify-content-end"><strong class="border rounded-start px-2">How are you?</strong></h6>
+      <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2"><strong  class="border rounded-end px-2">I'm good</strong><br>
+      <strong  class="border rounded-end px-2 ms-5">And you?</strong><br>
+      <strong  class="border rounded-end px-2 ms-5">What about your girlfriend?</strong><br>
+      <strong  class="border rounded-end px-2 ms-5">I saw her post that she injured</strong><br>
+      <div></div>
+      <h6 class="d-flex justify-content-end"><strong class="border rounded-start px-2 mt-2">Oh, about that</strong></h6>
+      <h6 class="d-flex justify-content-end"><strong class="border rounded-start px-2">she slipped and fell</strong></h6>
+      <h6 class="d-flex justify-content-end"><strong class="border rounded-start px-2">but she's better now</strong></h6>
+      <img src="https://github.com/mdo.png" alt="" width="35" height="35" class="rounded-circle me-2"><strong  class="border rounded-end px-2">ho, good</strong><br>
+      <strong  class="border rounded-end px-2 ms-5">can you play a game with me?</strong><br>
+      <h6 class="d-flex justify-content-end"><strong class="border rounded-start px-2"></strong></h6>
+    </div>
+    <div class="offcanvas-footer d-flex justify-content-between mx-2 mb-2">
+      <textarea type="text" class="form-control bg-light rounded-start" name="chat" placeholder="text.."
+      aria-label="Comment" aria-describedby="button-addon2" ></textarea>
+    <button class="btn btn-outline-secondary w-4" type="button" id="button-addon3"><i
+        class="bi bi-send"></i></button>
     </div>
   </div>
 </nav>
