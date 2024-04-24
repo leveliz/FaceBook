@@ -111,8 +111,12 @@ export class FeedsComponent implements OnInit, OnDestroy {
   }
 
   ondelete(postId: string) {
-    this.onPostSet = false;
-    this.postsService.deletePost(postId); // เรียกใช้ deletePost จาก PostsService เพื่อลบโพสต์
+    const confirmation: boolean = confirm('Are you sure you want to delete this post?');
+    if (confirmation) {
+      this.onPostSet = false;
+      this.postsService.deletePost(postId); // เรียกใช้ deletePost จาก PostsService เพื่อลบโพสต์
+    }
+
   }
 
   ngOnDestroy(): void {

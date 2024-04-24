@@ -9,8 +9,8 @@ export class SidetaprightComponent {
 
   names = [
     {imgUrl:'https://github.com/mdo.png', name:'Alex Novana'},
-    {imgUrl:'https://placekitten.com/200/300', name:'Asura Naruto'},
+    {imgUrl:'https://i.pinimg.com/originals/94/7d/19/947d19bf7c5a48c5207fc6697efbfba0.jpg', name:'Asura Naruto'},
     {imgUrl:'https://github.com/mdo.png', name:'Choco Pie'},
-    {imgUrl:'https://placekitten.com/200/300', name:'Jang Wangyoung'}
+    {imgUrl:'https://i.pinimg.com/originals/94/7d/19/947d19bf7c5a48c5207fc6697efbfba0.jpg', name:'Jang Wangyoung'}
   ];
 }
